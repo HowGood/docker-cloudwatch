@@ -1,0 +1,27 @@
+bootstrap.mlockall: true
+
+plugin.mandatory: "cloud-aws"
+
+cluster.name: ${ES_CLUSTER_NAME}
+
+network:
+  publish_host: _ec2:privateIp_
+
+gateway:
+  expected_nodes: ${ES_EXPECTED_NODES}
+
+path:
+  data: /usr/share/elasticsearch/data
+  logs: /var/log/elasticsearch
+
+cloud.node.auto_attributes: true
+
+discovery:
+  type: "ec2"
+  ec2:
+    host_type: "private_ip"
+    ping_timeout: "30s"
+  zen:
+    ping:
+      multicast:
+        enabled: false
